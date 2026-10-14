@@ -1,0 +1,20 @@
+{
+  "name": "affine-transforms",
+  "private": true,
+  "version": "0.0.1",
+  "description": "A math video about matrix multiplication and affine transforms.  Started as a #SoME5 entry.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "canvas-recorder-lib": "file:../canvas-recorder-lib",
+    "phil-lib": "^1.8.1"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3",
+    "vite": "^8.3.4"
+  }
+}
