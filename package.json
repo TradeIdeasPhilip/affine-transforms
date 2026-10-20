@@ -10,11 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "canvas-recorder-lib": "file:../canvas-recorder-lib",
+    "canvas-recorder-lib": "^0.5.0",
     "phil-lib": "^1.8.1"
   },
   "devDependencies": {
     "typescript": "^6.0.3",
     "vite": "^8.3.4"
+  },
+  "allowScripts": {
+    "onnxruntime-node": false,
+    "protobufjs": false,
+    "fsevents": true
   }
 }

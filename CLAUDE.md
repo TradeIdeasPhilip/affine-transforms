@@ -7,8 +7,10 @@ The author makes math education videos for a 3b1b / SoME audience.
 
 ```bash
 npm run dev     # Vite dev server on http://localhost:5175 (fixed port; the editor's saved state is per origin)
-npm run build   # tsc + vite build → docs/
+npm run build   # tsc + vite build → dist/ (gitignored)
 ```
+
+Every push to `master` builds and publishes to GitHub Pages (`.github/workflows/deploy.yml`).  See README.md, "Publishing".
 
 No test runner, no linter.  TypeScript errors surface in the IDE and on `npm run build`.
 
@@ -22,9 +24,11 @@ No test runner, no linter.  TypeScript errors surface in the IDE and on `npm run
 
 ## The library
 
-`canvas-recorder-lib` lives at `../canvas-recorder-lib`, linked with a `file:` dependency.
+`package.json` depends on the published `canvas-recorder-lib` from npm.  Never `file:../canvas-recorder-lib`:  GitHub's build machine has no `../`, so the deploy would fail.
+The source lives at `../canvas-recorder-lib`.
 It is now the master copy of the tooling: fix bugs and add features there, not in canvas-recorder, which is historical.
-After changing it, run `npm run build` (or keep `npm run watch` running) in the library, and reload this page.
+To try a library change here, `npm link ../canvas-recorder-lib`, and keep `npm run watch` running in the library.
+Any `npm install` or `npm ci` puts the published copy back.  `npm ls canvas-recorder-lib` shows which one is in use.
 Its README has notes for projects that use it.
 
 Import the main object and common components from `canvas-recorder-lib`; anything else by path,

@@ -9,8 +9,8 @@ export default defineConfig({
     sourcemap: "inline",
     chunkSizeWarningLimit: 5000,
     target: "esnext",
-    // GitHub Pages can serve everything in the docs directory.
-    outDir: "docs",
+    // The build goes to dist/, which is not committed.
+    // .github/workflows/deploy.yml builds a fresh copy and publishes it.
   },
   resolve: {
     // This project and canvas-recorder-lib both use phil-lib.  Make sure there's only one copy.
@@ -18,13 +18,13 @@ export default defineConfig({
   },
   server: {
     // Always the same port.  The video editor saves its work in the browser (IndexedDB),
-    // and the browser keeps a separate copy for each port.
-    // canvas-recorder uses 5173 and riemann-surfaces-3d uses 5174.
+    // and the browser keeps a separate copy for each port.  See canvas-recorder-lib's README, "Ports".
     port: 5175,
     strictPort: true,
     fs: {
-      // canvas-recorder-lib is linked from ../canvas-recorder-lib, outside this project.
-      // Its transcription worker is loaded by URL, so the folder has to be allowed explicitly.
+      // Only matters after `npm link ../canvas-recorder-lib`.  Then the library lives outside this
+      // project, and its transcription worker is loaded by URL, so the folder has to be allowed explicitly.
+      // Setting this turns off Vite's default, so this project's own folder has to be listed too.
       allow: [searchForWorkspaceRoot(process.cwd()), "../canvas-recorder-lib"],
     },
   },
